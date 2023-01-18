@@ -24,22 +24,48 @@ var (
 )
 
 func main() {
-	if err := AsSVG("out.svg"); err != nil {
+	//if err := AsSVG("out.svg"); err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Printf("created out.svg\n")
+	//if err := AsPNG2("out.png"); err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Printf("created out.png\n")
+	//if err := AsPNG("fill.png", true); err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Printf("created fill.png\n")
+	//if err := AsPNG("nofill.png", false); err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Printf("created nofill.png\n")
+	//if err := AsPNG3("nocirc.png", false); err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Printf("created nocirc.png\n")
+	if err := AsPNG4("vector.png", false, Xlat()); err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("created out.svg\n")
-	if err := AsPNG2("out.png"); err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("created out.png\n")
-	if err := AsPNG("fill.png", true); err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("created fill.png\n")
-	if err := AsPNG("nofill.png", false); err != nil {
-		log.Fatal(err)
-	}
-	log.Printf("created nofill.png\n")
+	log.Printf("created vector.png\n")
+}
+
+func calcz(i, j int) (x, y, z float64) {
+	// find point (x,y) at corner of cell (i,j)
+	x = xyrange * (float64(i)/cells - 0.5)
+	y = xyrange * (float64(j)/cells - 0.5)
+	// compute surface height z
+	z = f(x, y)
+	// return the coordinates
+	return x, y, z
+}
+
+func calcz3(i, j int) (x, y, z float64) {
+	x, y = scale(i, j)
+	// compute surface height z
+	z = f(x, y) //math.Sqrt(float64(i*i + j*j))
+	// return the coordinates
+	return x, y, z
 }
 
 func corner(i, j int) (sx, sy float64) {
@@ -60,4 +86,18 @@ func corner(i, j int) (sx, sy float64) {
 func f(x, y float64) float64 {
 	r := math.Hypot(x, y) // distance from the origin
 	return math.Sin(r) / r
+}
+
+// project (x,y,z) isometrically onto 2-D SVG canvas (sx, sy)
+func project(x, y, z float64) (sx, sy float64) {
+	sx = width/2 + (x-y)*cos30*xyscale
+	sy = height/2 + (x+y)*sin30*xyscale - z*zscale
+	return sx, sy
+}
+
+// find point (x,y) at corner of cell (i,j)
+func scale(i, j int) (float64, float64) {
+	x := xyrange * (float64(i)/cells - 0.5)
+	y := xyrange * (float64(j)/cells - 0.5)
+	return x, y
 }
