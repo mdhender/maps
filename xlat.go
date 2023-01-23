@@ -11,6 +11,41 @@ const FAR_Z = 2.5
 
 func Vectors() []vectors.Vector {
 	var v []vectors.Vector
+	// bottom face
+	v = append(v, vectors.NewVector(0, 0, 30))
+	v = append(v, vectors.NewVector(0, 0, 54))
+	v = append(v, vectors.NewVector(16, 0, 54))
+	v = append(v, vectors.NewVector(16, 0, 30))
+	v = append(v, vectors.NewVector(0, 0, 30))
+
+	// left side face
+	v = append(v, vectors.NewVector(0, 0, 30))
+	v = append(v, vectors.NewVector(0, 0, 54))
+	v = append(v, vectors.NewVector(0, 10, 54))
+	v = append(v, vectors.NewVector(0, 10, 30))
+	v = append(v, vectors.NewVector(0, 0, 30))
+
+	// left roof face
+	v = append(v, vectors.NewVector(0, 10, 30))
+	v = append(v, vectors.NewVector(0, 10, 54))
+	v = append(v, vectors.NewVector(8, 16, 54))
+	v = append(v, vectors.NewVector(8, 16, 30))
+	v = append(v, vectors.NewVector(0, 10, 30))
+
+	// right roof face
+	v = append(v, vectors.NewVector(8, 16, 30))
+	v = append(v, vectors.NewVector(8, 16, 54))
+	v = append(v, vectors.NewVector(16, 10, 54))
+	v = append(v, vectors.NewVector(16, 10, 30))
+	v = append(v, vectors.NewVector(8, 16, 30))
+
+	// right side face
+	v = append(v, vectors.NewVector(16, 0, 30))
+	v = append(v, vectors.NewVector(16, 0, 54))
+	v = append(v, vectors.NewVector(16, 10, 54))
+	v = append(v, vectors.NewVector(16, 10, 30))
+	v = append(v, vectors.NewVector(16, 0, 30))
+
 	// front face
 	v = append(v, vectors.NewVector(0, 0, 30))
 	v = append(v, vectors.NewVector(16, 0, 30))
@@ -26,12 +61,6 @@ func Vectors() []vectors.Vector {
 	v = append(v, vectors.NewVector(8, 16, 54))
 	v = append(v, vectors.NewVector(0, 10, 54))
 	v = append(v, vectors.NewVector(0, 0, 54))
-
-	//// beams
-	//v = append(v, NewVector(0, 0, 30))
-	//v = append(v, NewVector(0, 0, 54))
-	//v = append(v, NewVector(16, 0, 30))
-	//v = append(v, NewVector(16, 0, 54))
 
 	return ProjectAndClip(100, 100, v)
 }

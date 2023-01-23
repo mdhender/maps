@@ -44,10 +44,32 @@ func main() {
 	//	log.Fatal(err)
 	//}
 	//log.Printf("created nocirc.png\n")
-	if err := AsPNG4("vector.png", false, Vectors()); err != nil {
+	//if err := AsPNG4("vector.png", false, Vectors()); err != nil {
+	//	log.Fatal(err)
+	//}
+	//log.Printf("created vector.png\n")
+
+	// compose an object from multiple faces
+	object := Vertexes()
+	log.Printf("faces: object    %4d\n", len(object))
+	// clip the object
+	clipped := object.Clip(100, 100)
+	log.Printf("faces: clipped   %4d\n", len(clipped))
+	// project the clipped object
+	projected := clipped.Project(100, 100)
+	log.Printf("faces: projected %4d\n", len(projected))
+	// save as PNG
+	dc := NewContext(100, 100)
+	r := 0.333 // rand.Float64()
+	g := 0.333 // rand.Float64()
+	b := 0.333 // rand.Float64()
+	a := 1.0   // rand.Float64()*0.5 + 0.5
+	dc.SetRGBA(r, g, b, a)
+	projected.ToPNG(dc)
+	if err := dc.SavePNG("faces.png"); err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("created vector.png\n")
+	log.Printf("created faces.png\n")
 }
 
 func calcz(i, j int) (x, y, z float64) {
