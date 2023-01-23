@@ -124,6 +124,14 @@ func AsPNG3(name string, fill bool) error {
 	return dc.SavePNG(name)
 }
 
+func NewContext(width, height int) *gg.Context {
+	dc := gg.NewContext(width, height)
+	dc.SetRGBA(1, 1, 1, 1)
+	dc.Clear()
+	dc.SetLineWidth(0.5)
+	return dc
+}
+
 func nan(fs ...float64) bool {
 	for _, f := range fs {
 		if math.IsNaN(f) || math.IsInf(f, 0) {

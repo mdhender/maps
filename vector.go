@@ -10,7 +10,7 @@ func NewVector(x, y, z float64) Vector {
 	return Vector{x: x, y: y, z: z, w: 1}
 }
 
-// assume proper operator overloads here, with vectors and scalars
+// Length assumes proper operator overloads here, with vectors and scalars
 func (v Vector) Length() float64 {
 	return math.Sqrt(v.x*v.x + v.y*v.y + v.z*v.z)
 }

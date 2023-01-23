@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/fogleman/gg"
 	"math"
 )
 
@@ -9,16 +8,30 @@ const M_PI = math.Pi
 const NEAR_Z = 0.5
 const FAR_Z = 2.5
 
-func Xlat() []Vector {
+func Vectors() []Vector {
 	var v []Vector
-	v = append(v, NewVector(2, 2, 2))
-	v = append(v, NewVector(2, 4, 2))
-	v = append(v, NewVector(4, 4, 2))
-	v = append(v, NewVector(4, 2, 2))
-	v = append(v, NewVector(2, 2, 4))
-	v = append(v, NewVector(2, 4, 4))
-	v = append(v, NewVector(4, 4, 4))
-	v = append(v, NewVector(4, 2, 4))
+	// front face
+	v = append(v, NewVector(0, 0, 30))
+	v = append(v, NewVector(16, 0, 30))
+	v = append(v, NewVector(16, 10, 30))
+	v = append(v, NewVector(8, 16, 30))
+	v = append(v, NewVector(0, 10, 30))
+	v = append(v, NewVector(0, 0, 30))
+
+	// rear face
+	v = append(v, NewVector(0, 0, 54))
+	v = append(v, NewVector(16, 0, 54))
+	v = append(v, NewVector(16, 10, 54))
+	v = append(v, NewVector(8, 16, 54))
+	v = append(v, NewVector(0, 10, 54))
+	v = append(v, NewVector(0, 0, 54))
+
+	//// beams
+	//v = append(v, NewVector(0, 0, 30))
+	//v = append(v, NewVector(0, 0, 54))
+	//v = append(v, NewVector(16, 0, 30))
+	//v = append(v, NewVector(16, 0, 54))
+
 	return ProjectAndClip(100, 100, v)
 }
 
@@ -80,16 +93,12 @@ func SetupClipMatrix(fov, aspectRatio float64) Matrix {
 }
 
 func AsPNG4(name string, fill bool, vertices []Vector) error {
-	dc := gg.NewContext(width, height)
-	dc.SetRGBA(1, 1, 1, 1)
-	dc.Clear()
+	dc := NewContext(width, height)
 
 	r := 0.333 // rand.Float64()
 	g := 0.333 // rand.Float64()
 	b := 0.333 // rand.Float64()
 	a := 1.0   // rand.Float64()*0.5 + 0.5
-	w := 0.5
-	dc.SetLineWidth(w)
 
 	dc.SetRGBA(r, g, b, a)
 	for i, v := range vertices {

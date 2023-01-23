@@ -44,7 +44,7 @@ func main() {
 	//	log.Fatal(err)
 	//}
 	//log.Printf("created nocirc.png\n")
-	if err := AsPNG4("vector.png", false, Xlat()); err != nil {
+	if err := AsPNG4("vector.png", false, Vectors()); err != nil {
 		log.Fatal(err)
 	}
 	log.Printf("created vector.png\n")
