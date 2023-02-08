@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/mdhender/maps/draw"
 	"github.com/mdhender/maps/vectors"
 	"math"
 )
@@ -114,7 +115,7 @@ func SetupClipMatrix(fov, aspectRatio float64) vectors.Matrix {
 }
 
 func AsPNG4(name string, fill bool, vertices []vectors.Vector) error {
-	dc := NewContext(width, height)
+	dc := draw.NewContext(width, height)
 
 	r := 0.333 // rand.Float64()
 	g := 0.333 // rand.Float64()

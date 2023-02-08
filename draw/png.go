@@ -1,4 +1,4 @@
-package main
+package draw
 
 import (
 	"github.com/fogleman/gg"
@@ -6,6 +6,19 @@ import (
 	"math/rand"
 	//"github.com/golang/freetype/truetype"
 	//"golang.org/x/image/font/gofont/goregular"
+)
+
+// From The Go Programming Language book
+
+const (
+	//width, height = 600, 320            // canvas size in pixels
+	//cells         = 100                 // number of grid cells
+	width, height = 1200, 640           // canvas size in pixels
+	cells         = 200                 // number of grid cells
+	xyrange       = 30.0                // axis ranges (-xyrange .. +xyrange)
+	xyscale       = width / 2 / xyrange // pixels per x or y unit
+	zscale        = height * 0.4        // pixels per z unit (the 0.4 is arbitrary)
+	angle         = math.Pi / 6         // angle of x, y axes (=30degrees)
 )
 
 func AsPNG(name string, fill bool) error {

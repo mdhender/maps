@@ -4,43 +4,80 @@ import (
 	"github.com/mdhender/maps/faces"
 )
 
-// Vertexes returns the faces that compose the image
-func Vertexes() faces.Faces {
-	var f faces.Faces
-
+// MakeTriangle returns the faces that compose the image of a triangle.
+func MakeTriangle() (f faces.Faces) {
 	// front
-	f = append(f, faces.New(0, 0, 30, 0, 10, 30, 16, 10, 30))
-	f = append(f, faces.New(0, 0, 30, 16, 0, 30, 16, 10, 30))
+	f = append(f, faces.New(
+		0, 0, 0,
+		30, 0, 0,
+		0, 30, 0))
 
-	// rear
-	f = append(f, faces.New(0, 0, 54, 0, 10, 54, 16, 10, 54))
-	f = append(f, faces.New(0, 0, 54, 16, 0, 54, 16, 10, 54))
+	return f
+}
+
+// MakeHouse returns the faces that compose the image of a house
+func MakeHouse() (f faces.Faces) {
+	// front
+	f = append(f, faces.New(
+		0, 0, 0,
+		24, 0, 0,
+		24, 24, 0))
+	f = append(f, faces.New(
+		0, 0, 0,
+		24, 24, 0,
+		0, 24, 0))
 
 	// front top
-	f = append(f, faces.New(0, 10, 30, 8, 16, 30, 16, 10, 30))
+	f = append(f, faces.New(
+		0, 24, 0,
+		24, 24, 0,
+		12, 32, 0))
+
+	// rear
+	f = append(f, faces.New(
+		0, 0, -24,
+		24, 0, -24,
+		24, 24, -24))
+	f = append(f, faces.New(
+		0, 0, -24,
+		24, 24, -24,
+		0, 24, -24))
 
 	// rear top
-	f = append(f, faces.New(0, 10, 54, 8, 16, 54, 16, 10, 54))
+	f = append(f, faces.New(
+		0, 24, -24,
+		24, 24, -24,
+		12, 32, -24))
 
 	// left side
-	f = append(f, faces.New(0, 0, 30, 0, 0, 54, 0, 10, 54))
-	f = append(f, faces.New(0, 0, 30, 0, 10, 30, 0, 10, 54))
+	f = append(f, faces.New(
+		0, 0, 0,
+		0, 0, -24,
+		0, 24, -24))
+	f = append(f, faces.New(
+		0, 0, 0,
+		0, 24, -24,
+		0, 24, 0))
 
 	// right side
-	f = append(f, faces.New(16, 0, 30, 16, 0, 54, 16, 10, 54))
-	f = append(f, faces.New(16, 0, 30, 16, 10, 30, 16, 10, 54))
-
-	// left roof
-	f = append(f, faces.New(0, 10, 30, 0, 10, 54, 8, 16, 54))
-	f = append(f, faces.New(0, 10, 30, 8, 16, 30, 8, 16, 54))
-
-	// right roof
-	f = append(f, faces.New(16, 10, 30, 16, 10, 54, 8, 16, 54))
-	f = append(f, faces.New(16, 10, 30, 8, 16, 30, 8, 16, 54))
+	f = append(f, faces.New(
+		24, 0, 0,
+		24, 0, -24,
+		24, 24, -24))
+	f = append(f, faces.New(
+		24, 0, 0,
+		24, 24, -24,
+		24, 24, 0))
 
 	// bottom
-	f = append(f, faces.New(0, 0, 30, 0, 0, 54, 16, 0, 54))
-	f = append(f, faces.New(0, 0, 30, 16, 0, 30, 16, 0, 54))
+	f = append(f, faces.New(
+		0, 0, 0,
+		24, 0, 0,
+		24, 0, -24))
+	f = append(f, faces.New(
+		0, 0, 0,
+		24, 0, -24,
+		0, 0, -24))
 
 	return f
 }
